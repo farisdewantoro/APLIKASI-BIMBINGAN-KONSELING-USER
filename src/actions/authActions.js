@@ -5,11 +5,10 @@ import { GET_ERRORS, SET_CURRENT_ADMIN, LOGIN_ADMIN_LOADING, LOGIN_ADMIN_LOADING
 
 // Login - Get Admin Token
 
-let API_URL = "https://stark-inlet-37255.herokuapp.com";
 
 export const loginAdmin = adminData => dispatch => {
     dispatch(setLoginLoading());
-    axios.post(API_URL+'/api/admin/login', adminData)
+    axios.post('/api/admin/login', adminData)
         .then(res => {
             // Save to localstorage
             const { token } = res.data;
@@ -23,12 +22,11 @@ export const loginAdmin = adminData => dispatch => {
             dispatch(setCurrentAdmin(decoded));
         })
         .catch(err => {
-            console.log(err);
-            // dispatch(setLoginLoadingStop());
-            // dispatch({
-            //     type: GET_ERRORS,
-            //     payload: err.response.data
-            // });
+            dispatch(setLoginLoadingStop());
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
         });
 };
 

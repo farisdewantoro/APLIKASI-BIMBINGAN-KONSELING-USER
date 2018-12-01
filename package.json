@@ -25,6 +25,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build "
   },
+  "proxy": "https://stark-inlet-37255.herokuapp.com",
   "eslintConfig": {
     "extends": "react-app"
   },
