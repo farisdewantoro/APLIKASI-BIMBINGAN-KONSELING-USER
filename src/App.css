@@ -1,32 +1,88 @@
-.App {
-  text-align: center;
+.login-background {
+    background: #3f54f5;
+    height: 100vh;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.tableInnerHTML table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.tableInnerHTML table th,
+.tableInnerHTML table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.App-link {
-  color: #61dafb;
+.tableModify {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tableModify th,
+.tableModify td {
+    font-weight: normal;
+    padding: 8px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1px solid #dddddd;
+}
+
+.tableModify thead th {
+    background: #eeeeee;
+    vertical-align: bottom;
+}
+
+.tableModify tbody>tr:nth-child(odd)>td,
+.tableModify tbody>tr:nth-child(odd)>th {
+    background-color: #fafafa;
+}
+
+.tableModify .t-small {
+    width: 5%;
+}
+
+.tableModify .t-medium {
+    width: 15%;
+}
+
+.tableModify .t-status {
+    font-weight: bold;
+}
+
+.tableModify .t-active {
+    color: #46a546;
+}
+
+.tableModify .t-inactive {
+    color: #e00300;
+}
+
+.tableModify .t-draft {
+    color: #f89406;
+}
+
+.tableModify .t-scheduled {
+    color: #049cdb;
+}
+
+/* Small Sizes */
+
+@media (max-width: 480px) {
+    .tableModify-action thead {
+        display: none;
+    }
+    .tableModify-action tr {
+        border-bottom: 1px solid #dddddd;
+    }
+    .tableModify-action td {
+        border: 0;
+    }
+    .tableModify-action td:not(:first-child) {
+        display: block;
+    }
 }
