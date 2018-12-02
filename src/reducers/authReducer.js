@@ -1,28 +1,28 @@
 import isEmpty from '../validation/is-empty';
-import { SET_CURRENT_ADMIN, LOGIN_ADMIN_LOADING,LOGIN_ADMIN_LOADING_STOP} from '../actions/types';
+import { SET_CURRENT_MURID, LOGIN_MURID_LOADING,LOGIN_MURID_LOADING_STOP} from '../actions/types';
 const initialState ={
     isAuthenticated:false,
-    admin:{},
+    murid:{},
     loading:false,
 }
 
 export default function(state = initialState,action){
     switch(action.type){
-        case LOGIN_ADMIN_LOADING:
+        case LOGIN_MURID_LOADING:
             return {
                 ...state,
                 loading:true
             }
-        case LOGIN_ADMIN_LOADING_STOP:
+        case LOGIN_MURID_LOADING_STOP:
             return{
                 ...state,
                 loading:false
             }
-        case SET_CURRENT_ADMIN:
+        case SET_CURRENT_MURID:
             return {
                 ...state,
                 isAuthenticated:!isEmpty(action.payload),
-                admin:action.payload,
+                murid:action.payload,
                 loading:false
             }
         default:

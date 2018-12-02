@@ -19,39 +19,11 @@ export const mainListItems = (
             <ListItemText primary="Dashboard" />
         </ListItem>
         <Divider />
-        {/* <ListItem button component={Link} to='/penjurusan'>
-            <ListItemIcon>
-                <AccessibilityIcon />
-            </ListItemIcon>
-            <ListItemText primary="Penjurusan" />
-        </ListItem>
-        <Divider /> */}
-        <ListItem button component={Link} to='/pertanyaan/list'>
-            <ListItemIcon>
-                <QuestionIcon />
-            </ListItemIcon>
-            <ListItemText primary="Pertanyaan" />
-        </ListItem>
-        <Divider />
-        <ListItem button component={Link} to='/jurusan'>
-            <ListItemIcon>
-                <AccessibilityIcon />
-            </ListItemIcon>
-            <ListItemText primary="Jurusan" />
-        </ListItem>
-        <Divider />
         <ListItem button component={Link} to='/konsultasi'>
             <ListItemIcon>
                 <FindInPageIcon />
             </ListItemIcon>
             <ListItemText primary="Konsultasi" />
-        </ListItem>
-        <Divider />
-        <ListItem button component={Link} to='/datapenjurusansiswa'>
-            <ListItemIcon>
-                <HowToRegIcon />
-            </ListItemIcon>
-            <ListItemText primary="Data Penjurusan Siswa" />
         </ListItem>
         <Divider />
         <ListItem button component={Link} to='/rapotsiswa'>

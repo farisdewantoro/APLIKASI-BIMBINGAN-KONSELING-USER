@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { mainListItems } from './ListItem.js';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutAdmin } from '../../actions/authActions';
+import { logoutMurid } from '../../actions/authActions';
 
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
@@ -103,7 +103,7 @@ class MainLayout extends React.Component {
         this.setState({ open: !this.state.open });
     };
     onLogoutClick = () => {
-        this.props.logoutAdmin();
+        this.props.logoutMurid();
     }
     
 
@@ -111,7 +111,7 @@ class MainLayout extends React.Component {
 
         const { classes } = this.props;
         const { open } = this.state;
-        const {  admin } = this.props.auth;
+        const {  murid } = this.props.auth;
        
         return (
             <div className={classes.root}>
@@ -129,17 +129,7 @@ class MainLayout extends React.Component {
                     </Typography>
                  
                         <div className={classes.grow} />
-                        <Button
-                            color="inherit"
-                            component={Link} to='/profileadmin'
                       
-                            style={{textTransform:"none"}}
-                        >
-                            <FaceIcon />
-                            <Typography variant="subtitle1"  color="inherit"  style={{marginLeft:10}}>
-                                {admin.email}
-                        </Typography>
-                        </Button>
                         <Button
                             color="inherit"
                             component={Link} to='/login'
@@ -187,7 +177,7 @@ class MainLayout extends React.Component {
 
 MainLayout.propTypes = {
     classes: PropTypes.object.isRequired,
-    logoutAdmin:PropTypes.func.isRequired,
+    logoutMurid:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired
 
 };
@@ -202,12 +192,12 @@ const mapStateToProps = (state) => ({
 
 // Menggunakan library recompose
 export default compose(
-    connect(mapStateToProps, { logoutAdmin}),
+    connect(mapStateToProps, { logoutMurid}),
 )(withStyles(styles)(MainLayout));
 
 
 // // Menggunakan library recompose
 // export default compose(
 //     withStyles(styles, { name: 'Login' }),
-//     connect(mapStateToProps, { loginAdmin })
+//     connect(mapStateToProps, { loginmurid })
 // )(Login); 

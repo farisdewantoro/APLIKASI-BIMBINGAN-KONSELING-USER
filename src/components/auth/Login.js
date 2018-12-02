@@ -18,7 +18,7 @@ import {withStyles} from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {loginAdmin} from '../../actions/authActions';
+import {loginMurid} from '../../actions/authActions';
 
 
 
@@ -61,8 +61,8 @@ class Login extends React.Component {
     constructor(){
         super();
         this.state={
-            email:'',
-            password:'',
+            nis:'',
+            noTanggalLahir:'',
             errors:{}
         };
     }
@@ -72,12 +72,12 @@ class Login extends React.Component {
     }
     handlerSubmitLogin = (e)=>{
         e.preventDefault();
-        const adminData ={
-            email:this.state.email,
-            password:this.state.password
+        const muridData ={
+            nis:this.state.nis,
+            noTanggalLahir:this.state.noTanggalLahir
         };
     
-    this.props.loginAdmin(adminData);
+    this.props.loginMurid(muridData);
         // axios.post('/api/admin/login',admin)
     //     .then((res)=>{
     //         console.log(res);
@@ -144,17 +144,17 @@ class Login extends React.Component {
                             <CardContent>
                                 <form onSubmit={this.handlerSubmitLogin}>
                                 <Typography variant="h6" className={classes.formloginTitle}>
-                                    Admin Login
+                                     Login
                                 </Typography>
                                 <TextField
-                                    error={errors.email !== undefined  }
-                                id="form-email"
+                                    error={errors.nis !== undefined  }
+                                id="form-nis"
                                 fullWidth
-                                label="Email"
+                                label="NO INDUK SISWA"
                                 margin="normal"
-                                name="email"
-                                helperText={errors.email}
-                                    value={this.state.email}
+                                name="nis"
+                                helperText={errors.nis}
+                                    value={this.state.nis}
                                     onChange={this.handlerLoginValue}
                                     style={{ marginBottom: 20 }}
                                     InputProps={{
@@ -166,16 +166,16 @@ class Login extends React.Component {
                                 }}/>
                                 <br/>
                                 <TextField
-                                    error={errors.password !== undefined }
-                                    id="form-password"
+                                    error={errors.noTanggalLahir !== undefined }
+                                    id="form-noTanggalLahir"
                                     margin="normal"
                                     fullWidth
-                                    name="password"
+                                    name="noTanggalLahir"
                                     type="password"
-                                    value={this.state.password}
+                                    value={this.state.noTanggalLahir}
                                     onChange={this.handlerLoginValue}
-                                    label="Password"
-                                    helperText={errors.password}
+                                    label="NO TANGGAL LAHIR"
+                                        helperText={errors.noTanggalLahir !== undefined ? errors.noTanggalLahir : "Contoh 05012018" }
                                     style={{marginBottom:20}}
                                     InputProps={{
                                     startAdornment: (
@@ -207,7 +207,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes={
-    loginAdmin:PropTypes.func.isRequired,
+    loginMurid:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors:PropTypes.object.isRequired,
   
@@ -224,5 +224,5 @@ const mapStateToProps = (state)=>({
 // Menggunakan library recompose
 export default compose(
     withStyles(styles,{name:'Login'}),
-    connect(mapStateToProps,{loginAdmin})
+    connect(mapStateToProps, { loginMurid})
 )(Login); 
