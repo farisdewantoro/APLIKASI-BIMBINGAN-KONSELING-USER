@@ -223,7 +223,7 @@ const styles = (theme) =>({
       let loadingJurusan = this.props.jurusan.loading; 
       let loadingComponent;
       let formContainer; 
-      let historyStatus = this.props.historyJawaban !== null;
+      let historyStatus = this.props.konsultasi.historyJawaban !== null;
      
     
     if(loadingJurusan || loadingPertanyaan || loadingNextQuestion){
