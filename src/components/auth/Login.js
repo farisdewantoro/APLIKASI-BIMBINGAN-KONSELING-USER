@@ -175,7 +175,7 @@ class Login extends React.Component {
                                     value={this.state.noTanggalLahir}
                                     onChange={this.handlerLoginValue}
                                     label="NO TANGGAL LAHIR"
-                                        helperText={errors.noTanggalLahir !== undefined ? errors.noTanggalLahir : "Contoh 05012018" }
+                                        helperText={errors.noTanggalLahir !== undefined ? errors.noTanggalLahir : "Contoh 05012018 : Tanggal-Bulan-Tahun" }
                                     style={{marginBottom:20}}
                                     InputProps={{
                                     startAdornment: (

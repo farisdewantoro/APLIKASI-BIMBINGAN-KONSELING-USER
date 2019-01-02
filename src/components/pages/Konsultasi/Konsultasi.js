@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {getAllJurusan} from '../../../actions/jurusanActions';
 import {getAllPertanyaan} from '../../../actions/pertanyaanActions';
-import { getQuestionKonsultasi, saveHasilKonsultasi} from '../../../actions/konsultasiAction';
+import { getQuestionKonsultasi, saveHasilKonsultasi, getJawabanKonsultasi, resetJawabanKonsultasi} from '../../../actions/konsultasiAction';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import {compose} from 'redux';
@@ -85,10 +85,11 @@ const styles = (theme) =>({
      }
 
      componentDidMount(){
+         this.props.getJawabanKonsultasi(this.props.auth.murid.murid._id);
          this.props.getAllJurusan();
          this.props.getAllPertanyaan();
       
-        this.interval = setInterval(this.generateJurusan,100);
+         this.interval = setInterval(this.generateJurusan,100);
     
      }
      generateJurusan=()=>{
@@ -132,9 +133,17 @@ const styles = (theme) =>({
      componentWillReceiveProps(nextProps){
          let pertanyaan = nextProps.pertanyaan.pertanyaan;
          let jurusan = nextProps.jurusan.jurusans;
-         if(pertanyaan){
-             this.setState({pertanyaan:pertanyaan});
+         if (nextProps.konsultasi.historyJawaban !== this.props.konsultasi.historyJawaban) {
+             this.setState({ 
+                 pertanyaan: nextProps.konsultasi.historyJawaban.jurusan,
+                 startQuestion: !this.state.startQuestion });
          }
+         if(nextProps.konsultasi.historyJawaban === null ){
+             if (pertanyaan) {
+                 this.setState({ pertanyaan: pertanyaan });
+             }
+         }
+    
          if (jurusan) {
              this.setState({ jurusan: jurusan });
              let namaJurusan = jurusan.map(jur => {
@@ -149,6 +158,9 @@ const styles = (theme) =>({
          if (nextProps.konsultasi.pertanyaan.length > 0 && nextProps.konsultasi.pertanyaan[0].hasOwnProperty('namaJurusan')){
             this.setState({waktuAwal:new Date().getTime()});
          }
+
+       
+
      }
 
      handlerNisChange =(e)=>{
@@ -175,7 +187,8 @@ const styles = (theme) =>({
 
      }
      handlerReset = () =>{
-        window.location.href="/konsultasi";
+         this.props.resetJawabanKonsultasi(this.props.auth.murid.murid._id);
+         
      }
 
      submitAnswer = (kodeSoal,kodeJawaban) =>{
@@ -192,6 +205,7 @@ const styles = (theme) =>({
          }}])});
        
          this.props.getQuestionKonsultasi(newData);
+      
         }
 
         
@@ -209,8 +223,8 @@ const styles = (theme) =>({
       let loadingJurusan = this.props.jurusan.loading; 
       let loadingComponent;
       let formContainer; 
-
-      console.log(this.state);
+      let historyStatus = this.props.historyJawaban !== null;
+     
     
     if(loadingJurusan || loadingPertanyaan || loadingNextQuestion){
         loadingComponent=(
@@ -218,7 +232,7 @@ const styles = (theme) =>({
         )
     }
 
-        if(nis === '' || startQuestion === false || pertanyaan === null){
+        if( startQuestion === false || pertanyaan === null){
             formContainer=(
                 <div>
                     <Grid container direction="column" spacing={16}>
@@ -339,10 +353,10 @@ const styles = (theme) =>({
                                 </Grid>
 
                                 <Grid container >
-                                <Button variant="contained" color="primary" onClick={this.handlerSaveHasil} style={{margin:10}}>
+                                <Button variant="contained" color="primary" onClick={this.handlerSaveHasil} style={{ margin: 10 }} disabled={historyStatus}>
                                  <SaveIcon className={classes.icon}/>  Save
                                 </Button>
-                                <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.handlerReset}>
+                                <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.handlerReset} >
                                     <ResetIcon className={classes.icon} />  Reset
                                 </Button>
                                 
@@ -407,4 +421,4 @@ const mapStateToProps = (state)=>({
 });
 
 
-export default compose(withStyles(styles, { name: "Konsultasi" }), connect(mapStateToProps, { getAllPertanyaan, getAllJurusan, getQuestionKonsultasi, saveHasilKonsultasi}))(Konsultasi);
+export default compose(withStyles(styles, { name: "Konsultasi" }), connect(mapStateToProps, { getAllPertanyaan, getAllJurusan, getQuestionKonsultasi, saveHasilKonsultasi, getJawabanKonsultasi, resetJawabanKonsultasi}))(Konsultasi);

@@ -1,13 +1,28 @@
-import { GET_QUESTION_KONSULTASI, LOADING_NEXT_QUESTION_KONSULTASI } from '../actions/types';
+import { GET_QUESTION_KONSULTASI, LOADING_NEXT_QUESTION_KONSULTASI, GET_JAWABAN_KONSULTASI, RESET_JAWABAN_KONSULTASI } from '../actions/types';
 
 const initialState = {
     pertanyaan:[],
-    loading: false
+    loading: false,
+    historyJawaban:null
 }
 
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case GET_JAWABAN_KONSULTASI:
+            return{
+                ...state,
+                loading:false,
+                historyJawaban:action.payload,
+
+            }
+        case RESET_JAWABAN_KONSULTASI:
+            return{
+                ...state,
+                loading:false,
+                historyJawaban:null,
+                pertanyaan:[]
+            }
         case LOADING_NEXT_QUESTION_KONSULTASI:
             return {
                 ...state,
